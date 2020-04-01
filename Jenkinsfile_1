@@ -3,7 +3,7 @@ pipeline {
   agent any
     
   tools {nodejs "node"}
-  environment {NEXUS_SERVER = "http://nexus-common.apps.cluster.domain.example.com/repository/java"}
+  environment {NEXUS_SERVER = "https://nexus.grainger.com:8443/nexus/repositories/npmJS"}
   stages {
         
     stage('Cloning Git') {
@@ -34,7 +34,7 @@ pipeline {
     
     stage('Publish') {
       steps {
-         sh 'npm publish'
+         sh 'npm publish --registry $NEXUS_SERVER'
      }
     }
   }
