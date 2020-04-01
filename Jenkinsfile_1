@@ -3,7 +3,7 @@ pipeline {
   agent any
     
   tools {nodejs "node"}
-    
+  environment {NEXUS_SERVER = "http://nexus-common.apps.cluster.domain.example.com/repository/java"}
   stages {
         
     stage('Cloning Git') {
@@ -29,6 +29,12 @@ pipeline {
          sh '''
             zip -r node-todo.zip . -i node-todo-frontend
             '''
+     }
+    }
+    
+    stage('Publish') {
+      steps {
+         sh 'npm publish'
      }
     }
   }
