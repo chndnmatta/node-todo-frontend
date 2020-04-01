@@ -27,7 +27,7 @@ pipeline {
     stage('Package') {
       steps {
          sh '''
-            zip -r  node-todo.zip node-todo-frontend
+            zip -r node-todo.zip . -i node-todo-frontend
             '''
      }
     }
